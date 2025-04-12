@@ -1,3 +1,5 @@
+// Modified by Cobalt for TrimUI Smart, April 2025
+
 #include "input.h"
 #include <SDL/SDL.h>
 
@@ -88,6 +90,15 @@ void Input_KeyEvent(SDL_Event* evt)
 	// case SDLK_SPACE:    bSelect = w; break;
 	case SDLK_ESCAPE:   bSelect = w; break;
         case SDLK_RETURN:   bStart = w; break;
+#elif defined(TRIMUISMART)
+		case SDLK_LSHIFT:        bFaceUp = w; break;
+		case SDLK_LCTRL:        bFaceDown = w; break;	// A - jump
+		case SDLK_LALT:        bFaceLeft = w; break;	// B - slash
+		case SDLK_SPACE:         bFaceRight = w; break;	// TA - secondary
+		case SDLK_BACKSPACE:       bR = w; break;	    // TB - switch
+		case SDLK_RCTRL:       bSelect = w; break;		// select - menu
+		case SDLK_RETURN:       bStart = w; break;		// start - inventory
+		case SDLK_ESCAPE:        bSelect = w; break;	// reset - menu
 #else
         case SDLK_e:        bFaceUp = w; break;
         case SDLK_x:        bFaceDown = w; break;

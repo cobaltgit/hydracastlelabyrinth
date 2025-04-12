@@ -1,3 +1,5 @@
+// Modified by Cobalt for TrimUI Smart, April 2025
+
 #include "ini.h"
 #include "game.h"
 #include "options.h"
@@ -146,7 +148,11 @@ void saveSettings()
 
 		#ifdef _SDL
 		fprintf(f, "\r\n[audio]");
+#ifdef TRIMUISMART
+		fprintf(f, "\r\nmusic_type=%s", getMusicType()?"mp3":"midi");
+#else
 		fprintf(f, "\r\nmusic_type=%s", getMusicType()?"ogg":"midi");
+#endif
 		fprintf(f, "\r\nmusic=%d", music_volume);
 		// Audio
 		#endif
@@ -378,7 +384,11 @@ void musictypeLoad(char* first, char* second)
 {
 	#ifdef _SDL
 	if (strcmp(first, "music_type") == 0) {
+#ifdef TRIMUISMART
+		if (strcmp(second, "mp3") == 0) {
+#else
 		if (strcmp(second, "ogg") == 0) {
+#endif
 			setMusicType(1);
 		}
 		if (strcmp(second, "midi") == 0) {

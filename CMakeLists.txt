@@ -1,3 +1,5 @@
+# Modified by Cobalt for TrimUI Smart, April 2025
+
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 set(CMAKE_CXX_STANDARD 14)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -14,6 +16,7 @@ option(PANDORA "Set to ON if targeting an OpenPandora device" ${PANDORA})
 option(ODROID "Set to ON if targeting an ODroid device" ${ODROID})
 option(PYRA "Set to ON if targeting a DragonBox Pyra device" ${PYRA})
 option(CHIP "Set to ON if targeting a PocketCHIP device" ${CHIP})
+option(TRIMUISMART "Set to ON if targeting a TrimUI Smart device" ${TRIMUISMART})
 option(USE_CCACHE "Set to ON to use ccache if present in the system" ${USE_CCACHE})
 option(EMSCRIPTEN "Set to ON to build using EMSCRIPTEN" ${EMSCRIPTEN})
 
@@ -64,6 +67,9 @@ if(PYRA)
 endif()
 if(CHIP)
 	add_definitions(-DCHIP)
+endif()
+if(TRIMUISMART)
+	add_definitions(-DTRIMUISMART)
 endif()
 if(ODROID)
 	add_definitions(-DODROID)

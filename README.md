@@ -1,3 +1,30 @@
+# Hydra Castle Labyrinth for TrimUI Smart
+
+This is Hydra Castle Labyrinth modified with input mappings and fixed sound for the TrimUI Smart. To build, assuming you have an ARMv7 cross compile setup:
+
+```
+sudo apt install libsdl-dev libsdl-mixer1.2-dev cmake
+cd ~
+git clone https://github.com/ptitSeb/hydracastlelabyrinth.git
+cd hydracastlelabyrinth
+cmake -DCMAKE_TOOLCHAIN_FILE=/path/to/armv7-toolchain.cmake -DTRIMUISMART=ON .
+make -j$(nproc)
+```
+
+To run:
+
+```sh
+$ export SDL_VIDEO_FBCON_ROTATION="CCW" # TrimUI Smart has a 240x320 screen
+$ ./hcl -x1
+```
+
+Changes made:
+
+* Using MP3 instead of OGG for music, the Smart's `SDL_mixer` library was not built with OGG Vorbis support
+* Reduced audio buffer size to 2048 to avoid underruns
+* Added input mappings for the TrimUI Smart's controls 
+
+# Original readme
 # Hydra Castle Labyrinth
 
 ![HCL build status](https://api.travis-ci.org/ptitSeb/hydracastlelabyrinth.png "HCL build status")

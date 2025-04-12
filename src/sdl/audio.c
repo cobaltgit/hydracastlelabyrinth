@@ -1,3 +1,5 @@
+// Modified by Cobalt for TrimUI Smart, April 2025
+
 #include "audio.h"
 #include "../options.h"
 #include <SDL/SDL.h>
@@ -10,7 +12,7 @@ void PHL_AudioInit()
     #ifndef __MORPHOS__
     Mix_Init(MIX_INIT_OGG); // midi is on by default
     #endif
-    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 4096);
+    Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048); // reduced buffer size to 2048 to avoid underruns
 
     PHL_MusicVolume(0.25f * music_volume);
 }
@@ -31,7 +33,11 @@ PHL_Music PHL_LoadMusic(char* fname, int loop)
     char buff[4096];
     strcpy(buff, "data/");
     strcat(buff, fname);
+#ifdef TRIMUISMART
+    strcat(buff, getMusicType()?".mp3":".mid"); // use MP3 instead of OGG, TrimUI Smart's stock SDL_mixer does not support OGG Vorbis
+#else
     strcat(buff, getMusicType()?".ogg":".mid");
+#endif
     ret.snd = Mix_LoadMUS(buff);
     return ret;
 }

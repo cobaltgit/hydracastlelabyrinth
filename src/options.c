@@ -1,3 +1,5 @@
+// Modified by Cobalt for TrimUI Smart, April 2025
+
 #include <stdio.h>
 #include "options.h"
 #include "PHL.h"
@@ -339,7 +341,11 @@ void optionsDraw()
 			// Music type
 			PHL_DrawTextBold("MUSIC", xleft, ydraw, YELLOW);
 			if (getMusicType() == 1) {
+#ifdef TRIMUISMART
+				PHL_DrawTextBold("MP3", xright, ydraw, YELLOW);
+#else
 				PHL_DrawTextBold("OGG", xright, ydraw, YELLOW);
+#endif
 			}
 			else{
 				PHL_DrawTextBold("MIDI", xright, ydraw, YELLOW);
